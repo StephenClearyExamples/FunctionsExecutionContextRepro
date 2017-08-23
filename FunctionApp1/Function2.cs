@@ -15,6 +15,7 @@ namespace FunctionApp1
         [FunctionName("Function2")]
         public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "fails")]HttpRequestMessage req, ExecutionContext context)
         {
+            req.GetRequestContext().IncludeErrorDetail = true;
             req.GetConfiguration().Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
             throw new Exception("unexpected exception");
         }
