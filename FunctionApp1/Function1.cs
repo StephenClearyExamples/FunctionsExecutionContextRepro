@@ -15,10 +15,7 @@ namespace FunctionApp1
         [FunctionName("Function1")]
         public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "works")]HttpRequestMessage req)
         {
-            req.GetRequestContext().IncludeErrorDetail = true;
-            req.GetRequestContext().IsLocal = true;
             req.GetConfiguration().Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
-            return req.CreateErrorResponse(HttpStatusCode.InternalServerError, "alt custom message");
             throw new Exception("unexpected exception");
         }
     }
