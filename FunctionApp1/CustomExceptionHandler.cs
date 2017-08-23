@@ -14,7 +14,7 @@ namespace FunctionApp1
     {
         public override void Handle(ExceptionHandlerContext context)
         {
-            context.Result = new ResponseMessageResult(context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "custom message string"));
+            context.Result = new ResponseMessageResult(context.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "custom message string"));
         }
     }
 }
