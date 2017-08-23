@@ -13,11 +13,10 @@ namespace FunctionApp1
     public static class Function1
     {
         [FunctionName("Function1")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "works")]HttpRequestMessage req)
+        public static HttpResponseMessage Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "works")]HttpRequestMessage req)
         {
             req.GetRequestContext().IncludeErrorDetail = true;
             req.GetConfiguration().Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
-            await Task.Delay(100);
             throw new Exception("unexpected exception");
         }
     }
